@@ -234,9 +234,10 @@ LOOP:
 			break LOOP
 		case s := <-col.signalsChannel:
 			col.service.Logger().Info("Received signal from OS", zap.String("signal", s.String()))
-			if s != syscall.SIGHUP {
+			if s != syscall.SIGHUP && s != syscall.SIGTERM {
 				break LOOP
 			}
+			fmt.Println("Signal detected maybe SIGHUP or SIGTERM")
 			if err := col.reloadConfiguration(ctx); err != nil {
 				return err
 			}

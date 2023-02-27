@@ -145,7 +145,6 @@ func (bps *builtPipelines) ShutdownAll(ctx context.Context) error {
 			errs = multierr.Append(errs, exp.Shutdown(ctx))
 		}
 	}
-
 	return errs
 }
 
